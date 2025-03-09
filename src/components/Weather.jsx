@@ -1,18 +1,28 @@
 import React, { useState } from 'react'
 
-function Weather({weather}) {
+function Weather({ weather, image }) {
 //    console.log(weather);
 
     const [isFah, setIsFah] = useState(false)
 
     const temperature = isFah ? `${(weather.temp * 9 / 5) + 32} °F` : `${weather.temp} °C`
   return (
-    <div>
+    <div
+      className="container"
+      style={{
+        backgroundImage: `url(${image})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+    
+      }}
+    >
+        <div className='title'>
         <h1>Weather app</h1>
+        </div>
         <p>{weather.city}, {weather.country}</p>
         <div>
             {/* <img src="" alt="" /> */}
-            <div>
+            <div className='information'>
                 <h2>{weather.description}</h2>
                 <ul>
                     <li>Wind Speed {weather.speed}m/s</li>

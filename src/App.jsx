@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import axios from 'axios'
 import Weather from './components/Weather'
-// import {thunderstorm, drizzle} from './assets'
+import {clear, clouds, drizzle, mist, rain, snow, thunderstom} from './assets'
 
 // Se importa la llave del archivo .env
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
+//array de imagenes
+const images = [clear, clouds, drizzle, mist, rain, snow, thunderstom];
 
 const codes = {
   thunderstorm: [200, 201, 202, 210, 211, 212, 221, 230, 231, 232],
@@ -19,15 +21,6 @@ const codes = {
   clouds: [801, 802, 803, 804]
 }
 
-const icons = {
-  thunderstorm: '⛈️',
-  drizzle: '🌦️',
-  rain: '🌧️',
-  snow: '❄️',
-  atmosphere: '🌫️',
-  clear: '☀️',
-  clouds: '☁️'
-}
 
 
 function App() {
@@ -35,6 +28,7 @@ function App() {
   const [weather, setWeather] = useState(null)
   const [message, setMessage] = useState('')
   const [loader,  setLoader] = useState(null)
+  const [image, setImage] = useState(images);
 
   useEffect(() => {
     if (window.navigator.geolocation) {
@@ -55,32 +49,50 @@ function App() {
     }
   }, [])
 
-  useEffect(() =>{
+  useEffect(() => {
     if (coords) {
       axios.get(`${BASE_URL}lat=${coords.lat}&lon=${coords.lon}&units=metric&lang=es&appid=${API_KEY}`)
-        .then((res) =>{
-          const iconCodeId = res.data.weather[0].id
-          const keys = Object.keys(codes)
-
-          console.log(res.data);
+        .then((res) => {
+          const iconCodeId = res.data.weather[0].id; // Aquí usas el id real de la API
+          console.log('este es el id', iconCodeId);
+  
+          const keys = Object.keys(codes);
+          const weatherType = keys.find((k) => codes[k].includes(iconCodeId));
+          console.log('este es el weather', weatherType);
+  
           setWeather({
             city: res.data.name,
             country: res.data.sys.country,
             temp: res.data.main.temp,
             description: res.data.weather[0].description,
-            icon: icons[keys.find((k) => codes[k].includes(iconCodeId))],
+            id: iconCodeId,
             speed: res.data.wind.speed,
             clouds: res.data.clouds.all,
             pressure: res.data.main.pressure
-          })
-        })
+          });
+  
+          // Mapeo de tipos de clima a imágenes
+          const weatherImages = {
+            clear: images[0],
+            clouds: images[1],
+            drizzle: images[2],
+            atmosphere: images[3],
+            rain: images[4],
+            snow: images[5],
+            thunderstorm: images[6],
+          };
+  
+          // Establecer la imagen en base al tipo de clima
+          if (weatherType) {
+            setImage(weatherImages[weatherType]);
+          }
+        });
     }
-
-  }, [coords])
+  }, [coords]);
   return (
     
     <>
-    {weather && <Weather weather= {weather}></Weather>}
+    {weather && <Weather weather={weather} image={image} />}
     <h1>{message}</h1>
 {/* <h1>App {JSON.stringify(weather)}</h1> */}
 {/* <div>
