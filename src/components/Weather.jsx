@@ -13,7 +13,6 @@ function Weather({ weather, background, image }) {
         backgroundImage: `url(${background})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-
       }}
     >
       <div className='item header'>

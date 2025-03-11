@@ -66,11 +66,17 @@
   /* width: 100px; */
 }
 
+.icon{
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
 
 @media (width >=510px) {
   .grid-container {
     width: 400px;
   }
+
+  
 }
 
 
