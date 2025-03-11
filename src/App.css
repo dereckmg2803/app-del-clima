@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -16,24 +15,26 @@
   border-radius: 5px;
   padding: 30px;
   color: black;
-  width: 300px;
+  width: 330px;
   
 }
 
 .title {
   font-family: 'Pacifico', cursive;
   font-weight: bold;
+  font-size: 26px;
 }
 
 .weather-info {
   display: flex;
-  justify-content: space-between; /* Alinea el texto y el valor en extremos opuestos */
+  justify-content: space-between;
+  align-items:end; /* Alinea el texto y el valor en extremos opuestos */
    /* Pone en negrita el valor */
 }
 
 .value {
   text-align: right; 
-  font-weight: bold;/* Asegura que el número esté alineado a la derecha */
+  text-shadow: 0.5px 0.5px 0 black
 }
 
 
@@ -64,6 +65,7 @@
 
   /* width: 100px; */
 }
+
 
 @media (width >=510px) {
   .grid-container {

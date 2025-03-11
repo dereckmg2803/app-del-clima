@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Iansui&display=swap');
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  /* color: rgba(255, 255, 255, 0.87); */
   background-color: #242424;
 
   font-synthesis: none;
@@ -17,6 +19,7 @@ ul {
   list-style: none; /* Quita los puntos */
   margin: 0;
   padding: 0;
+  font-family: "Iansui", cursive;
   /* text-align: left; */
 }
 
@@ -45,15 +48,29 @@ body {
 h1 {
   font-size: 1.2em;
   line-height: 1.1;
+  font-family: "Iansui", cursive;
+  /* font-weight: 400; */
+  text-shadow: 0.5px 0.5px 0 black
 }
 
+p{
+  font-family: "Iansui", cursive;
+  margin: 0;
+  /* font-size: 14px; */
+}
+
+h3{
+  font-family: "Iansui", cursive;
+  font-weight: 400; /* O el peso que tenga la fuente */
+  text-shadow: 0.5px 0.5px 0 black
+}
 button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
+  font-family: "Iansui", cursive;
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;

@@ -2,14 +2,19 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import axios from 'axios'
 import Weather from './components/Weather'
-import {clear, clouds, drizzle, mist, rain, snow, thunderstom} from './assets'
+import {
+  clear, clouds, drizzle, mist, rain, snow, thunderstom,
+  clearI, cloudsI,drizzleI, mistI, rainI, snowI, thunderstomI,
+
+} from './assets'
 
 // Se importa la llave del archivo .env
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 //array de imagenes
-const images = [clear, clouds, drizzle, mist, rain, snow, thunderstom];
+const backgrounds = [clear, clouds, drizzle, mist, rain, snow, thunderstom];
+const images = [clearI, cloudsI, drizzleI, mistI, rainI, snowI, thunderstomI];
 
 const codes = {
   thunderstorm: [200, 201, 202, 210, 211, 212, 221, 230, 231, 232],
@@ -28,6 +33,7 @@ function App() {
   const [weather, setWeather] = useState(null)
   const [message, setMessage] = useState('')
   const [loader,  setLoader] = useState(null)
+  const [background, setBackground] = useState(images);
   const [image, setImage] = useState(images);
 
   useEffect(() => {
@@ -72,6 +78,16 @@ function App() {
           });
   
           // Mapeo de tipos de clima a imágenes
+          const weatherBackgrounds = {
+            clear: backgrounds[0],
+            clouds: backgrounds[1],
+            drizzle: backgrounds[2],
+            atmosphere: backgrounds[3],
+            rain: backgrounds[4],
+            snow: backgrounds[5],
+            thunderstorm: backgrounds[6],
+          };
+
           const weatherImages = {
             clear: images[0],
             clouds: images[1],
@@ -84,7 +100,8 @@ function App() {
   
           // Establecer la imagen en base al tipo de clima
           if (weatherType) {
-            setImage(weatherImages[weatherType]);
+            setBackground(weatherBackgrounds[weatherType]);
+            setImage(weatherImages[weatherType])
           }
         });
     }
@@ -92,7 +109,7 @@ function App() {
   return (
     
     <>
-    {weather && <Weather weather={weather} image={image} />}
+    {weather && <Weather weather={weather} background={background} image={image} />}
     <h1>{message}</h1>
 {/* <h1>App {JSON.stringify(weather)}</h1> */}
 {/* <div>

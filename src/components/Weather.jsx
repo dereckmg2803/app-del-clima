@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 
-function Weather({ weather, image }) {
+function Weather({ weather, background, image }) {
   //    console.log(weather);
 
   const [isFah, setIsFah] = useState(false)
 
-  const temperature = isFah ? `${(weather.temp * 9 / 5) + 32} °F` : `${weather.temp} °C`
-  return (
+  const temperature = isFah ? `${((weather.temp * 9 / 5) + 32).toFixed(2)} °F` : `${weather.temp.toFixed(2)} °C`;
+    return (
     <div
       className="grid-container"
       style={{
-        backgroundImage: `url(${image})`,
+        backgroundImage: `url(${background})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
 
@@ -18,19 +18,25 @@ function Weather({ weather, image }) {
     >
       <div className='item header'>
         <span className='title'>
-          <h1>Weather app</h1>
+          <h1>App del clima</h1>
         </span>
         <p>{weather.city}, {weather.country}</p>
       </div>
 
 
-      <div className='item icon'>
-        {/* <img src="" alt="" /> */}
-        <h2>icon</h2>
+      <div className='item icon' style={{
+        backgroundImage: `url(${image})`,
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        
+      }}>
+         {/* <img src={image} alt="Icono del clima" />  */}
+         {console.log(image)}
       </div>
 
       <div className='item middle'>
-        <h2>{weather.description}</h2>
+        <h1>"{weather.description.charAt(0).toUpperCase() + weather.description.slice(1)}"</h1>
         <ul>
           <li className="weather-info">
             Wind Speed: <span className="value">{weather.speed}m/s</span>
