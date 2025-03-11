@@ -7,51 +7,69 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-.container {
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   background-color: cyan;
   border-radius: 5px;
   padding: 30px;
   color: black;
-  width: 250px;
+  width: 300px;
+  
 }
 
 .title {
   font-family: 'Pacifico', cursive;
   font-weight: bold;
 }
+
+.weather-info {
+  display: flex;
+  justify-content: space-between; /* Alinea el texto y el valor en extremos opuestos */
+   /* Pone en negrita el valor */
+}
+
+.value {
+  text-align: right; 
+  font-weight: bold;/* Asegura que el número esté alineado a la derecha */
+}
+
+
+
+.header, .footer {
+  grid-column: span 3; /* Ocupar toda la fila */
+  /* background-color: lightblue; */
+}
+
+.middle {
+  /* background-color: lightcoral; */
+  display: flex;
+  flex-direction: column;
+  padding-left: 50px;
+  padding-right: 10px;
+  grid-column: span 2;
+}
+
+
+
+.item {
+  /* background-color: lightgray; */
+  /* padding: 20px; */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  /* width: 100px; */
+}
+
+@media (width >=510px) {
+  .grid-container {
+    width: 400px;
+  }
+}
+
+
+
