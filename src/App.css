@@ -25,6 +25,37 @@
     80%{background-position:0%  50%, 50%  50%,100% 100%}
 }
 
+.input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 400px;
+  margin: 1rem;
+}
+
+.input input {
+  width: 100%;
+  padding: 10px 15px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.input input:focus {
+  border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+.search-container{
+  color: #000;
+}
+
+.search-container button{
+  margin: 0rem 1rem;
+}
 
 .grid-container {
   display: grid;
