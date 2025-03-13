@@ -7,7 +7,7 @@
 
   color-scheme: light dark;
 	/* Colors */
-	--primary-color: light-dark(#90b0c5,#242424);
+	--primary-color: #90b0c5;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -46,9 +46,10 @@ body {
 }
 
 h1 {
-  font-size: 1.2em;
+ 
   line-height: 1.1;
   font-family: "Iansui", cursive;
+
   /* font-weight: 400; */
   text-shadow: 0.5px 0.5px 0 black
 }

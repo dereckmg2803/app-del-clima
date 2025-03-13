@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import axios from 'axios'
 import Weather from './components/Weather'
+import SearchCity from './components/SearchCity';
 import {
   clear, clouds, drizzle, mist, rain, snow, thunderstom,
   clearI, cloudsI,drizzleI, mistI, rainI, snowI, thunderstomI,
@@ -32,9 +33,10 @@ function App() {
   const [coords, setCoords] = useState(null)
   const [weather, setWeather] = useState(null)
   const [message, setMessage] = useState('')
-  const [loader,  setLoader] = useState(null)
+  const [loader,  setLoader] = useState(true)
   const [background, setBackground] = useState(images);
   const [image, setImage] = useState(images);
+  const [showSearch, setShowSearch] = useState(false);
 
   useEffect(() => {
     if (window.navigator.geolocation) {
@@ -45,13 +47,14 @@ function App() {
       }
 
       function error (error) {
-        console.log('Permission denied');
-        setMessage('Permission denied')
+        setMessage('Permiso denegado');
+        setLoader(false);
       }
 
       navigator.geolocation.getCurrentPosition(success, error);
     } else{
-      console.log('Geolocation is not supported by this browser.');
+      console.log('La geolocación no se puede usar en este navegador');
+      setLoader(false);
     }
   }, [])
 
@@ -60,11 +63,9 @@ function App() {
       axios.get(`${BASE_URL}lat=${coords.lat}&lon=${coords.lon}&units=metric&lang=es&appid=${API_KEY}`)
         .then((res) => {
           const iconCodeId = res.data.weather[0].id; // Aquí usas el id real de la API
-          console.log('este es el id', iconCodeId);
-  
           const keys = Object.keys(codes);
           const weatherType = keys.find((k) => codes[k].includes(iconCodeId));
-          console.log('este es el weather', weatherType);
+
   
           setWeather({
             city: res.data.name,
@@ -103,22 +104,31 @@ function App() {
             setBackground(weatherBackgrounds[weatherType]);
             setImage(weatherImages[weatherType])
           }
+          setLoader(false); 
+        })
+        .catch(() => {
+          setMessage('Error al conseguir la información del clima');
+          setLoader(false);
         });
     }
   }, [coords]);
-  return (
-    
-    <>
-    {weather && <Weather weather={weather} background={background} image={image} />}
-    <h1>{message}</h1>
-{/* <h1>App {JSON.stringify(weather)}</h1> */}
-{/* <div>
-  <h1>Weather</h1>
-<pre>JSON.stringify(weather, null, 2)</pre>
 
-</div> */}
+ return (
+    <>
+      {showSearch ? (
+        <SearchCity setShowSearch={setShowSearch } />
+      ) : (
+        <>
+          {loader && <div className="loader"></div>}
+          {!loader && weather && (
+  <Weather weather={weather} background={background} image={image} setShowSearch={setShowSearch} />
+)}
+
+          {!loader && message && <h1>{message}</h1>}
+        </>
+      )}
     </>
-  )
+  );
 }
 
 export default App
